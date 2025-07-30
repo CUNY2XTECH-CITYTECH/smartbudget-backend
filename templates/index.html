@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Budget App</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h1>Budget Tracker</h1>
+  <form method="POST" action="/add">
+    <input name="description" placeholder="Description" required>
+    <input name="amount" type="number" step="0.01" required>
+    <input name="category" placeholder="Category" required>
+    <select name="type">
+      <option value="income">Income</option>
+      <option value="expense">Expense</option>
+    </select>
+    <button type="submit">Add</button>
+  </form>
+<form action="/upload" method="POST" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".csv" required>
+    <button type="submit">Upload CSV</button>
+</form>
+{% if records %}
+    <h3>CSV Contents:</h3>
+    <!-- render data into table -->
+    <table border="1" cellpadding="5" cellspacing="0">
+      <thead>
+        <tr>
+          {% for key in records[0].keys() %}
+            <th>{{ key }}</th>
+          {% endfor %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for row in records %}
+          <tr>
+            {% for value in row.values() %}
+              <td>{{ value }}</td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+  <canvas id="myChart" width="400" height="200"></canvas>
+</body>
+</html>

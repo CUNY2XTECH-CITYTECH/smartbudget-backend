@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Community Threads</title>
+</head>
+<body>
+    <h1>📣 Budgeting & Investing Threads</h1>
+
+    <!-- Form to create a new thread -->
+    <form method="POST" action="/threads">
+        <input name="title" placeholder="Thread Title" required>
+        <br>
+        <textarea name="content" placeholder="Start a conversation..." required></textarea>
+        <br>
+        <button type="submit">Post Thread</button>
+    </form>
+
+    <hr>
+
+    <!-- Show all threads -->
+    {% for thread in threads %}
+        <div style="border:1px solid #ccc; padding:10px; margin:10px 0;">
+            <h3>{{ thread.title }}</h3>
+            <p>{{ thread.content }}</p>
+            <small>Posted at {{ thread.timestamp }}</small>
+        </div>
+    {% endfor %}
+</body>
+</html>
